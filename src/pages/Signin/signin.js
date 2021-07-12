@@ -7,12 +7,13 @@ import { Button } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { logUserIn } from "../../redux/reducers/auth.js";
+const herokuLink = "https://reactchatappsocketio.herokuapp.com";
 function SigninPage() {
   const dispatch = useDispatch();
   const history = useHistory();
   const responseSuccessGoogle = async (response) => {
     axios
-      .post("http://localhost:4000/api/auth", {
+      .post(`${herokuLink}/api/auth`, {
         ...response.profileObj,
         tokenID: response.tokenId,
       })
@@ -79,7 +80,7 @@ function SigninPage() {
             onSuccess={responseSuccessGoogle}
             onFailure={responseFailureGoogle}
             cookiePolicy={"single_host_origin"}
-            redirectUri={"http://localhost:3000/login"}
+            // redirectUri={"http://localhost:3000/login"}
           />
 
           <Button
