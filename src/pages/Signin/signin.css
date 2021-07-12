@@ -1,0 +1,119 @@
+.signinpage {
+  min-width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  max-height: 100vh;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  background-color: #242526;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.signinpage .signinpage__container {
+  min-width: 300px;
+  width: 80%;
+  max-width: 500px;
+  height: 500px;
+  border: 1px solid black;
+  background-color: #292a2b;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.signinpage .signinpage__container .signinpage__container__title {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.signinpage .signinpage__container .signinpage__container__title > h2 {
+  color: whitesmoke;
+}
+
+.signinpage .signinpage__container .signinpage__container__email {
+  width: 100%;
+  color: wheat;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  -ms-grid-column-align: center;
+      justify-self: center;
+}
+
+.signinpage .signinpage__container .signinpage__container__email > label {
+  color: white;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginbuttonHolder {
+  margin-top: 20px;
+  width: 100%;
+  margin-bottom: 5px;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginbuttonHolder .signinpage__container__loginbuttonHolder__button {
+  margin-left: 100%;
+  -webkit-transform: translate(-110%);
+          transform: translate(-110%);
+  background-color: #0f1114;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginbuttonHolder .signinpage__container__loginbuttonHolder__button > span {
+  text-transform: none;
+  color: whitesmoke;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+
+.signinpage .signinpage__container .signinpage__container__createAccountDiv {
+  width: 100%;
+  text-align: center;
+}
+
+.signinpage .signinpage__container .signinpage__container__createAccountDiv > p {
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+
+.signinpage .signinpage__container .signinpage__container__createAccountDiv .signinpage__container__createAccountDiv__button > span {
+  text-transform: none;
+  color: #6666FF;
+}
+
+.signinpage .signinpage__container .signinpage__container__createAccountDiv .signinpage__container__createAccountDiv__button > span:hover {
+  color: #3333ff;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginWithSocialMedia {
+  margin-top: 10px;
+  width: 100%;
+  height: auto;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginWithSocialMedia .signinpage__container__loginWithSocialMedia__google {
+  width: 70%;
+  margin-bottom: 10px;
+  background-color: #DB4437;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginWithSocialMedia .signinpage__container__loginWithSocialMedia__google > span {
+  text-transform: none;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginWithSocialMedia .signinpage__container__loginWithSocialMedia__facebook {
+  width: 70%;
+  background-color: #4285f4;
+}
+
+.signinpage .signinpage__container .signinpage__container__loginWithSocialMedia .signinpage__container__loginWithSocialMedia__facebook > span {
+  text-transform: none;
+}
+/*# sourceMappingURL=signin.css.map */

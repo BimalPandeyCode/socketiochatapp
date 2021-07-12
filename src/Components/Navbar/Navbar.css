@@ -1,0 +1,374 @@
+.navbar {
+  background-color: #242526;
+  z-index: 2;
+  height: 60px;
+  font-size: 16px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 60px 1fr 0.001fr 1fr;
+      grid-template-columns: 60px 1fr 0.001fr 1fr;
+      grid-template-areas: "navBarTitle navbarSearchBar navbarButtonsHolder navbarPersonalInfo";
+  border-bottom: 2px solid black;
+}
+
+.navbar .navbar__title {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: navBarTitle;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.navbar .navbar__title .navbar__title__logo {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.navbar .navbar__searchbar {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: navbarSearchBar;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .navbar__searchbar .navbar__searchbar__inputHolder {
+  width: 100%;
+  height: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr auto;
+      grid-template-columns: 1fr auto;
+      grid-template-areas: "inputHolderInput inputHolderSearchButtonContainer";
+}
+
+.navbar .navbar__searchbar .navbar__searchbar__inputHolder .navbar__searchbar__inputHolder__input {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: inputHolderInput;
+  height: 70%;
+  outline: none;
+  border: none;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.navbar .navbar__searchbar .navbar__searchbar__inputHolder .navbar__searchbar__inputHolder__searchButtonContainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: inputHolderSearchButtonContainer;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+  height: 100%;
+}
+
+.navbar .navbar__searchbar .navbar__searchbar__inputHolder .navbar__searchbar__inputHolder__searchButtonContainer .navbar__searchbar__inputHolder__searchButtonContainer__button {
+  height: 73%;
+}
+
+.navbar .navbar__buttonsHolder {
+  -ms-grid-row: 1;
+  -ms-grid-column: 3;
+  grid-area: navbarButtonsHolder;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.navbar .navbar__buttonsHolder .navbar__buttonsHolder__div {
+  width: 100%;
+  height: 100%;
+}
+
+.navbar .navbar__buttonsHolder .navbar__buttonsHolder__div .navbar__buttonsHolder__div__button {
+  margin-left: 10px;
+  height: 60px;
+  width: 60px;
+  padding: 0px;
+  color: whitesmoke;
+}
+
+.navbar .navbar__personalInfoHolder {
+  -ms-grid-row: 1;
+  -ms-grid-column: 4;
+  grid-area: navbarPersonalInfo;
+  display: -ms-grid;
+  display: grid;
+  place-items: end;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder {
+  width: auto;
+  height: 100%;
+}
+
+.navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder .navbar__personalInfoHolder__buttonHolder__button {
+  height: 50px;
+  width: 50px;
+  margin-left: 3px;
+  padding: 0px;
+  background-color: #303233;
+}
+
+.navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder .navbar__personalInfoHolder__buttonHolder__button > .MuiButton-label {
+  padding: 0px;
+  margin: 0px;
+}
+
+.navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder .navbar__personalInfoHolder__buttonHolder__button .navbar__personalInfoHolder__buttonHolder__button__image {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.Dropdown {
+  z-index: 3;
+  position: absolute;
+  top: 58px;
+  min-width: 300px;
+  -webkit-transform: translate(-45%);
+          transform: translate(-45%);
+  border: 1px solid #a2a5a7;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #242526;
+  height: auto !important;
+  max-height: calc(95vh - 55px) !important;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 300px;
+  overflow-y: auto;
+}
+
+.Dropdown::-webkit-scrollbar {
+  width: 5px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.Dropdown::-webkit-scrollbar-thumb {
+  background-color: black;
+  width: 5px;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+.Dropdown:hover::-webkit-scrollbar {
+  width: 5px;
+  background-color: dimgray;
+}
+
+.Dropdown:hover::-webkit-scrollbar-thumb {
+  background-color: black;
+  width: 5px;
+}
+
+.Dropdown .NotificationDropDown {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 95%;
+  margin: auto;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__topbar {
+  height: auto;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification {
+  width: 100%;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: minmax(60px, 70px) 1fr;
+      grid-template-columns: minmax(60px, 70px) 1fr;
+      grid-template-areas: "eachNotiImageContainer notificationText";
+  border-radius: 5px;
+  margin-bottom: 5px;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification:hover {
+  background-color: #56585a;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification .NotificationDropDown__eachNotification__imageContainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 1;
+  grid-area: eachNotiImageContainer;
+  display: -ms-grid;
+  display: grid;
+  place-items: center;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification .NotificationDropDown__eachNotification__imageContainer .NotificationDropDown__eachNotification__imageContainer__image {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification .NotificationDropDown__eachNotification__notificationText {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: notificationText;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification .NotificationDropDown__eachNotification__notificationText > p {
+  font-size: 14px;
+}
+
+.Dropdown .NotificationDropDown .NotificationDropDown__eachNotification .NotificationDropDown__eachNotification__notificationText > span {
+  font-size: 12px;
+}
+
+.Dropdown .Dropdown__buttonHolder {
+  margin: auto;
+  width: 95%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__profilebutton {
+  width: 100%;
+  color: white;
+  background-color: #242526;
+  height: 70px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  padding-left: 0;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__profilebutton .Dropdown__buttonHolder__profilebutton__text {
+  padding-right: auto;
+  margin-right: auto;
+  font-size: 14px;
+  text-decoration: none;
+  text-transform: none;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__profilebutton .Dropdown__buttonHolder__profilebutton__imageContainer__image {
+  height: 65px;
+  width: 65px;
+  border-radius: 50%;
+  margin-right: auto;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__profilebutton:hover {
+  background-color: #a2a5a7;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__button {
+  width: 100%;
+  color: white;
+  background-color: #242526;
+  height: 50px;
+  margin-bottom: 5px;
+  font-size: 14px;
+  text-transform: none;
+}
+
+.Dropdown .Dropdown__buttonHolder .Dropdown__buttonHolder__button:hover {
+  background-color: #a2a5a7;
+}
+
+@media screen and (max-width: 700px) {
+  .navbar {
+    height: 120px;
+    font-size: 16px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 60px 0.001fr 1fr;
+        grid-template-columns: 60px 0.001fr 1fr;
+    -ms-grid-rows: 60px 60px;
+        grid-template-rows: 60px 60px;
+        grid-template-areas: "navBarTitle  navbarButtonsHolder navbarPersonalInfo" "navbarSearchBar navbarSearchBar navbarSearchBar";
+  }
+  .navbar .navbar__title .navbar__title__logo {
+    padding: 0px;
+    margin: 0px;
+  }
+  .navbar .navbar__searchbar .navbar__searchbar__inputHolder {
+    width: 90%;
+    margin: auto;
+  }
+  .navbar .navbar__searchbar .navbar__searchbar__inputHolder .navbar__searchbar__inputHolder__input {
+    margin: auto;
+    width: 99%;
+  }
+  .navbar .navbar__searchbar .navbar__searchbar__inputHolder .navbar__searchbar__inputHolder__searchButtonContainer {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: inputHolderSearchButtonContainer;
+    height: 100%;
+  }
+  .navbar .navbar__buttonsHolder {
+    -ms-grid-row: 1;
+    -ms-grid-column: 2;
+    grid-area: navbarButtonsHolder;
+    display: -ms-grid;
+    display: grid;
+    place-items: center;
+  }
+  .navbar .navbar__buttonsHolder .navbar__buttonsHolder__div {
+    width: 100%;
+    height: 70%;
+  }
+  .navbar .navbar__buttonsHolder .navbar__buttonsHolder__div .navbar__buttonsHolder__div__button {
+    margin-left: 10px;
+    height: 100%;
+  }
+  .navbar .navbar__personalInfoHolder {
+    -ms-grid-row: 1;
+    -ms-grid-column: 3;
+    grid-area: navbarPersonalInfo;
+    display: -ms-grid;
+    display: grid;
+    place-items: end;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+  .navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder {
+    width: auto;
+    height: 100%;
+  }
+  .navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder .navbar__personalInfoHolder__buttonHolder__button {
+    margin-left: 2px;
+    height: 70%;
+    color: white;
+    margin-top: auto;
+  }
+  .navbar .navbar__personalInfoHolder .navbar__personalInfoHolder__buttonHolder .navbar__personalInfoHolder__buttonHolder__button .navbar__personalInfoHolder__buttonHolder__button__image {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .navbar__buttonsHolder {
+    width: 0px;
+    display: hidden;
+    opacity: 0;
+  }
+}
+/*# sourceMappingURL=Navbar.css.map */
