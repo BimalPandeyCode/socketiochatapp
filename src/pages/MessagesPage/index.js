@@ -18,7 +18,8 @@ import Navbar from "../../Components/Navbar/Navbar.js";
 let socket;
 let DisplayImage =
   "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=z32A2UTnN8sAX8cSYh0&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=60f2a77035c69157c07eab204a2382f6&oe=60EE0ABE";
-const herokuLink = "https://reactchatappsocketio.herokuapp.com";
+// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 const MessagesPage = () => {
   const dispatch = useDispatch();
   let userInfo = useSelector((state) => state.logUserIn.user);
@@ -91,6 +92,7 @@ const MessagesPage = () => {
       <SideFriendsList
         currentFriend={currentFriend}
         setCurrentFriend={setCurrentFriend}
+        setShowFriendsInfo={setShowFriendsInfo}
       />
       {width < 550 ? (
         <></>
@@ -155,7 +157,11 @@ const SearchFriends = () => {
   );
 };
 
-const SideFriendsList = ({ currentFriend, setCurrentFriend }) => {
+const SideFriendsList = ({
+  currentFriend,
+  setCurrentFriend,
+  setShowFriendsInfo,
+}) => {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.logUserIn.user);
   var friendsList = useSelector((state) => state.friendsList.friends);
@@ -171,11 +177,12 @@ const SideFriendsList = ({ currentFriend, setCurrentFriend }) => {
       })
       .catch((err) => console.log(err));
   }, []);
-  const EachFriend = ({ frn, name, imageUrl, _id }) => {
+  const EachFriend = ({ frn, name, imageUrl, _id, setShowFriendsInfo }) => {
     return (
       <div
         onClick={() => {
           setCurrentFriend(frn);
+          setShowFriendsInfo(false);
         }}
         className="MessagesPageContainer__friendList__IndividualFriends"
         key={_id}
@@ -204,6 +211,7 @@ const SideFriendsList = ({ currentFriend, setCurrentFriend }) => {
           name={frn.name}
           imageUrl={frn.imageUrl}
           _id={frn._id}
+          setShowFriendsInfo={setShowFriendsInfo}
         />
       ))}
     </div>
@@ -227,8 +235,13 @@ const IndividualMessages = ({
       "MessagesPageContainer__individualMessages__messagesContainer"
     );
     element.scrollTop = element.scrollHeight;
-  }, [messages]);
-
+  }, [messages, currentFriend]);
+  const ScrollToBottom = () => {
+    let element = document.getElementById(
+      "MessagesPageContainer__individualMessages__messagesContainer"
+    );
+    element.scrollTop = element.scrollHeight;
+  };
   const ReceivedMessages = ({ message, idk }) => {
     return (
       <div
@@ -297,7 +310,7 @@ const IndividualMessages = ({
               setShowFriendsInfo(!showFriendsInfo);
             }}
           >
-            <i className="fas fa-info-circle"></i>
+            <i className="fas fa-info-circle MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button__icon"></i>
           </IconButton>
         </div>
       </div>
@@ -348,6 +361,7 @@ const IndividualMessages = ({
                 socket.emit("messagesSent", { ...emitData });
                 dispatch(addSentMessage({ ...emitData }));
                 setCreateMessages("");
+                ScrollToBottom();
               }
             }}
           >

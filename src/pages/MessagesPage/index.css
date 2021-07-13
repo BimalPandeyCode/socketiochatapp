@@ -162,13 +162,13 @@
 }
 
 .MessagesPageContainer .MessagesPageContainer__friendList:hover::-webkit-scrollbar {
-  width: 8px;
-  background-color: dimgray;
+  width: 15px;
+  background-color: black;
 }
 
 .MessagesPageContainer .MessagesPageContainer__friendList:hover::-webkit-scrollbar-thumb {
-  background-color: black;
-  width: 8px;
+  background-color: white;
+  width: 15px;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages {
@@ -252,6 +252,14 @@
   margin: auto;
 }
 
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__topBar .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button__icon {
+  color: white;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__topBar .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button > i {
+  color: white;
+}
+
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer {
   -ms-grid-row: 2;
   -ms-grid-column: 1;
@@ -300,6 +308,7 @@
   padding: 10px;
   margin: 0px;
   font-size: 15px;
+  white-space: pre-line;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -351,6 +360,7 @@
   padding: 10px;
   margin: 0px;
   font-size: 15px;
+  white-space: pre-line;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -359,20 +369,23 @@
   background-color: rgba(255, 255, 255, 0);
 }
 
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer::-webkit-scrollbar:hover {
+  width: 10px;
+}
+
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer::-webkit-scrollbar-thumb {
-  background-color: black;
-  width: 5px;
+  width: 6px;
   background-color: rgba(255, 255, 255, 0);
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer:hover::-webkit-scrollbar {
-  width: 5px;
-  background-color: dimgray;
+  width: 6px;
+  background-color: #363636;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer:hover::-webkit-scrollbar-thumb {
-  background-color: black;
-  width: 5px;
+  background-color: #d6d6d6;
+  width: 6px;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar {
@@ -478,6 +491,10 @@
   display: none;
 }
 
+.MessagesPageContainer .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
+  color: white;
+}
+
 .MessagesPageContainer .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__nameAndPhotoDiv {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -569,9 +586,21 @@
 
 @media screen and (max-width: 550px) {
   .MessagesPageContainer {
-    -ms-grid-columns: 0.001fr auto min-content !important;
-        grid-template-columns: 0.001fr auto -webkit-min-content !important;
-        grid-template-columns: 0.001fr auto min-content !important;
+    -ms-grid-columns: 100px minmax(0, 1fr) !important;
+        grid-template-columns: 100px minmax(0, 1fr) !important;
+        grid-template-areas: "NavBar NavBar" "searchBar  individualmessages" "friendList individualmessages" !important;
+    -ms-grid-rows: auto 125px 1fr;
+        grid-template-rows: auto 125px 1fr;
+  }
+  .MessagesPageContainer__individualMessages {
+    width: 100%;
+  }
+  .MessagesPageContainer__friendsInfo {
+    min-width: 100%;
+    -ms-grid-row: 2 !important;
+    -ms-grid-row-span: 2 !important;
+    -ms-grid-column: 2 !important;
+    grid-area: individualmessages !important;
   }
   .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar {
     position: relative;

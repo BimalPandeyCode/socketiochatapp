@@ -7,7 +7,8 @@ import { Button } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { logUserIn } from "../../redux/reducers/auth.js";
-const herokuLink = "https://reactchatappsocketio.herokuapp.com";
+// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 function SigninPage() {
   const dispatch = useDispatch();
   const history = useHistory();
