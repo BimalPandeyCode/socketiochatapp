@@ -16,8 +16,8 @@ const Navbar = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    console.log(localStorage.getItem("userinfo"));
-    console.log(userinfo);
+    // console.log(localStorage.getItem("userinfo"));
+    // console.log(userinfo);
     if (JSON.stringify(userinfo.user) === "{}") {
       if (localStorage.getItem("userinfo") === null) {
         history.push("/login");
@@ -33,7 +33,7 @@ const Navbar = () => {
             } else {
               dispatch(logUserIn(res.data));
             }
-            console.log(res);
+            // console.log(res);
           })
           .catch((err) => console.log(err));
         // dispatch(logUserIn(JSON.parse(localStorage.getItem("userinfo"))));
@@ -137,10 +137,7 @@ const Navbar = () => {
             {/* profile */}
             <img
               className="navbar__personalInfoHolder__buttonHolder__button__image"
-              src={
-                userinfo.user.imageUrl ||
-                "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=goY93jDts0YAX-xTF7Q&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=bfa92c8ed539effdd621db70c1ce2f13&oe=60DC3E7E"
-              }
+              src={userinfo.user.imageUrl}
               alt=""
             />
           </IconButton>

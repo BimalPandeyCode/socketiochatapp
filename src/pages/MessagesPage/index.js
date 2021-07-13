@@ -7,7 +7,10 @@ import { io } from "socket.io-client";
 import axios from "axios";
 
 import { useSelector, useDispatch } from "react-redux";
-import { addFriendsToFriendList } from "../../redux/reducers/friends.js";
+import {
+  addFriendsToFriendList,
+  changeOnlineStatus,
+} from "../../redux/reducers/friends.js";
 import {
   loadFirstMessages,
   addSentMessage,
@@ -16,8 +19,8 @@ import {
 import Navbar from "../../Components/Navbar/Navbar.js";
 
 let socket;
-let DisplayImage =
-  "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=z32A2UTnN8sAX8cSYh0&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=60f2a77035c69157c07eab204a2382f6&oe=60EE0ABE";
+// let DisplayImage =
+//   "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=z32A2UTnN8sAX8cSYh0&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=60f2a77035c69157c07eab204a2382f6&oe=60EE0ABE";
 // const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
 const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 const MessagesPage = () => {
@@ -67,7 +70,13 @@ const MessagesPage = () => {
     socket.on("test", (res) => {
       console.log(res);
     });
+    socket.on("OnlineUsers", (res) => {
+      dispatch(changeOnlineStatus(res));
+      // console.log("SOCKET IO ONLINE USERS");
+      // console.log(res);
+    });
     socket.on("connect_error", (err) => {
+      dispatch();
       console.log(err);
     });
   }, []);
@@ -78,7 +87,7 @@ const MessagesPage = () => {
         id: localStorage.getItem("userinfo"),
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         dispatch(loadFirstMessages(res.data));
       })
       .catch((err) => console.log(err));
@@ -171,8 +180,9 @@ const SideFriendsList = ({
         id: localStorage.getItem("userinfo"),
       })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
         setCurrentFriend(res.data[0]);
+        document.title = "Wabbit/" + res.data[0].name.split(" ")[0];
         dispatch(addFriendsToFriendList(res.data));
       })
       .catch((err) => console.log(err));
@@ -183,6 +193,7 @@ const SideFriendsList = ({
         onClick={() => {
           setCurrentFriend(frn);
           setShowFriendsInfo(false);
+          document.title = "Wabbit/" + frn.name.split(" ")[0];
         }}
         className="MessagesPageContainer__friendList__IndividualFriends"
         key={_id}
@@ -193,6 +204,11 @@ const SideFriendsList = ({
             className="MessagesPageContainer__friendList__IndividualFriends__ImageContainer__image"
             src={imageUrl}
             alt=""
+            style={
+              frn.active !== false && frn.active !== undefined
+                ? { boxShadow: "0 0 3pt 4pt green" }
+                : {}
+            }
           />
         </div>
         <div className="MessagesPageContainer__friendList__IndividualFriends__InfoContainer">
@@ -212,6 +228,7 @@ const SideFriendsList = ({
           imageUrl={frn.imageUrl}
           _id={frn._id}
           setShowFriendsInfo={setShowFriendsInfo}
+          key={frn._id}
         />
       ))}
     </div>
@@ -279,14 +296,18 @@ const IndividualMessages = ({
           ele.sentBy === currentFriend._id
         ) {
           if (ele.sentBy === userInfo._id) {
-            output.push(<Sentmessages message={ele.message} idk={index} />);
+            output.push(
+              <Sentmessages message={ele.message} idk={index} key={index} />
+            );
           } else if (ele.sentTo === userInfo._id) {
-            output.push(<ReceivedMessages message={ele.message} idk={index} />);
+            output.push(
+              <ReceivedMessages message={ele.message} idk={index} key={index} />
+            );
           }
         }
       });
     } else {
-      output.push(<></>);
+      output.push(<React.Fragment key={"561"} />);
     }
     return output;
   };
@@ -299,7 +320,12 @@ const IndividualMessages = ({
         </div>
         <div className="MessagesPageContainer__individualMessages__topBar__personInfoContainer">
           <p>{currentFriend.name}</p>
-          <p>Active now</p>
+          <p>
+            {currentFriend.active !== false &&
+            currentFriend.active !== undefined
+              ? "Active now"
+              : "Offline"}
+          </p>
         </div>
         <div className="MessagesPageContainer__individualMessages__topBar__friendsInfoToggle">
           <IconButton

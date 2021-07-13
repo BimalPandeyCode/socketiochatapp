@@ -617,7 +617,6 @@
     display: flex !important;
     opacity: 1 !important;
     color: white !important;
-    background-color: black;
   }
   .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button > span > i {
     color: white;
