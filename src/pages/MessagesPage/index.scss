@@ -543,7 +543,7 @@
 
         .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button {
           display: flex !important;
-          opacity: 100% !important;
+          opacity: 1 !important;
           color: white !important;
           background-color: black;
 
@@ -552,7 +552,7 @@
           }
 
           .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
-            opacity: 100%;
+            opacity: 1;
             color: white;
             z-index: 3;
           }
