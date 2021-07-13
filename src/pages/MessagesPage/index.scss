@@ -216,12 +216,10 @@
           margin: auto;
 
           .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button__icon {
-            color: white;
+            color: white !important;
           }
 
-          &>i {
-            color: white;
-          }
+
         }
       }
     }
@@ -410,7 +408,7 @@
           display: none;
 
           .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
-            color: white;
+            color: white !important;
           }
         }
       }
@@ -447,6 +445,8 @@
         color: white;
         text-transform: none;
         font-size: 13px;
+
+
       }
     }
 
@@ -539,15 +539,24 @@
         position: absolute;
         top: 0;
         left: 0;
+        z-index: 4;
 
         .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button {
           display: flex !important;
           opacity: 100% !important;
+          color: white !important;
+
+          &>span>i {
+            color: white;
+          }
+
+          .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
+            opacity: 100%;
+            color: white;
+            z-index: 3;
+          }
         }
 
-        .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
-          opacity: 100%;
-        }
       }
     }
   }

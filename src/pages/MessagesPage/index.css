@@ -253,11 +253,7 @@
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__topBar .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button__icon {
-  color: white;
-}
-
-.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__topBar .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle .MessagesPageContainer__individualMessages__topBar__friendsInfoToggle__button > i {
-  color: white;
+  color: white !important;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer {
@@ -492,7 +488,7 @@
 }
 
 .MessagesPageContainer .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
-  color: white;
+  color: white !important;
 }
 
 .MessagesPageContainer .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__nameAndPhotoDiv {
@@ -613,15 +609,22 @@
     position: absolute;
     top: 0;
     left: 0;
+    z-index: 4;
   }
   .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button {
     display: -webkit-box !important;
     display: -ms-flexbox !important;
     display: flex !important;
     opacity: 100% !important;
+    color: white !important;
   }
-  .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
+  .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button > span > i {
+    color: white;
+  }
+  .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
     opacity: 100%;
+    color: white;
+    z-index: 3;
   }
 }
 /*# sourceMappingURL=index.css.map */
