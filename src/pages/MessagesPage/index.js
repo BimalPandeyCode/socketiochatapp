@@ -10,6 +10,8 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   addFriendsToFriendList,
   changeOnlineStatus,
+  sortFriendsListBasedOnIncommingMessage,
+  sortFriendsInitially,
 } from "../../redux/reducers/friends.js";
 import {
   loadFirstMessages,
@@ -65,6 +67,7 @@ const MessagesPage = () => {
     socket.on("receivedMessages", (res) => {
       setRecei(res.message);
       dispatch(addSentMessage(res));
+      dispatch(sortFriendsListBasedOnIncommingMessage(res.sentBy));
     });
 
     socket.on("test", (res) => {
@@ -87,8 +90,30 @@ const MessagesPage = () => {
         id: localStorage.getItem("userinfo"),
       })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         dispatch(loadFirstMessages(res.data));
+        // let copyRes = JSON.parse(JSON.stringify([...res.data]));
+        // let allUsers = [];
+        // copyRes = copyRes.sort((a, b) => b.sentTime - a.sentTime);
+        // console.log(copyRes);
+        // for (let i = 0; i < copyRes.length; i++) {
+        //   if (
+        //     !allUsers.includes(copyRes[i].sentBy) ||
+        //     !allUsers.includes(copyRes[i].sentTo)
+        //   ) {
+        //     if (copyRes.sentTo === localStorage.getItem("userinfo")) {
+        //       if (!allUsers.includes(copyRes[i].sentBy)) {
+        //         allUsers.push(copyRes[i].sentBy);
+        //       }
+        //     } else {
+        //       if (!allUsers.includes(copyRes[i].sentTo)) {
+        //         allUsers.push(copyRes[i].sentTo);
+        //       }
+        //     }
+        //   }
+        // }
+        // console.log(allUsers);
+        // dispatch(sortFriendsInitially(allUsers));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -200,15 +225,18 @@ const SideFriendsList = ({
         style={currentFriend._id === _id ? { backgroundColor: "#243750" } : {}}
       >
         <div className="MessagesPageContainer__friendList__IndividualFriends__ImageContainer">
+          {frn.active !== false && frn.active !== undefined ? (
+            <div className="MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div">
+              <div className="MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div__onlineindicator"></div>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <img
             className="MessagesPageContainer__friendList__IndividualFriends__ImageContainer__image"
             src={imageUrl}
             alt=""
-            style={
-              frn.active !== false && frn.active !== undefined
-                ? { boxShadow: "0 0 3pt 4pt green" }
-                : {}
-            }
           />
         </div>
         <div className="MessagesPageContainer__friendList__IndividualFriends__InfoContainer">
@@ -387,6 +415,9 @@ const IndividualMessages = ({
                 socket.emit("messagesSent", { ...emitData });
                 dispatch(addSentMessage({ ...emitData }));
                 setCreateMessages("");
+                dispatch(
+                  sortFriendsListBasedOnIncommingMessage(currentFriend._id)
+                );
                 ScrollToBottom();
               }
             }}

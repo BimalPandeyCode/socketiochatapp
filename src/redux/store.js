@@ -8,4 +8,5 @@ export default configureStore({
     friendsList,
     currentMessages,
   },
+  devTools: false,
 });

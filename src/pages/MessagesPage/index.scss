@@ -99,8 +99,30 @@
       .MessagesPageContainer__friendList__IndividualFriends__ImageContainer {
         grid-area: profileImageContainer;
         height: 100%;
-        display: grid;
-        place-items: center;
+        width: auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // display: grid;
+        // place-items: center;
+
+        .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div {
+          width: 0px;
+          height: 0px;
+          position: relative;
+
+          .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div__onlineindicator {
+
+            position: absolute;
+            top: 10px;
+            left: 43px;
+            width: 14px;
+            height: 14px;
+            background-color: #00FF00;
+            border-radius: 50%;
+            box-shadow: 0px 0px 0px 3px #242526;
+          }
+        }
 
         .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__image {
           width: 60px;
@@ -256,6 +278,9 @@
             margin: 0px;
             font-size: 15px;
             white-space: pre-line;
+            overflow-wrap: break-word !important;
+            word-wrap: break-word;
+            word-break: break-all;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           }
         }
@@ -295,6 +320,7 @@
             margin: 0px;
             font-size: 15px;
             white-space: pre-line;
+            overflow-wrap: break-word;
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
           }
         }
@@ -539,7 +565,6 @@
         position: absolute;
         top: 0;
         left: 0;
-        z-index: 4;
 
         .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button {
           display: flex !important;
@@ -554,7 +579,7 @@
           .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
             opacity: 1;
             color: white;
-            z-index: 3;
+            z-index: inherit;
           }
         }
 

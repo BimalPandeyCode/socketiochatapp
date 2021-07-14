@@ -119,9 +119,34 @@
   -ms-grid-column: 1;
   grid-area: profileImageContainer;
   height: 100%;
-  display: -ms-grid;
-  display: grid;
-  place-items: center;
+  width: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.MessagesPageContainer .MessagesPageContainer__friendList .MessagesPageContainer__friendList__IndividualFriends .MessagesPageContainer__friendList__IndividualFriends__ImageContainer .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div {
+  width: 0px;
+  height: 0px;
+  position: relative;
+}
+
+.MessagesPageContainer .MessagesPageContainer__friendList .MessagesPageContainer__friendList__IndividualFriends .MessagesPageContainer__friendList__IndividualFriends__ImageContainer .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__Div__onlineindicator {
+  position: absolute;
+  top: 10px;
+  left: 43px;
+  width: 14px;
+  height: 14px;
+  background-color: #00FF00;
+  border-radius: 50%;
+  -webkit-box-shadow: 0px 0px 0px 3px #242526;
+          box-shadow: 0px 0px 0px 3px #242526;
 }
 
 .MessagesPageContainer .MessagesPageContainer__friendList .MessagesPageContainer__friendList__IndividualFriends .MessagesPageContainer__friendList__IndividualFriends__ImageContainer .MessagesPageContainer__friendList__IndividualFriends__ImageContainer__image {
@@ -305,6 +330,9 @@
   margin: 0px;
   font-size: 15px;
   white-space: pre-line;
+  overflow-wrap: break-word !important;
+  word-wrap: break-word;
+  word-break: break-all;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -357,6 +385,7 @@
   margin: 0px;
   font-size: 15px;
   white-space: pre-line;
+  overflow-wrap: break-word;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
@@ -609,7 +638,6 @@
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 4;
   }
   .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button {
     display: -webkit-box !important;
@@ -624,7 +652,7 @@
   .MessagesPageContainer__friendsInfo .MessagesPageContainer__friendsInfo__topbar .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button .MessagesPageContainer__friendsInfo__topbar__friendsInfoToggle__Button__Icon {
     opacity: 1;
     color: white;
-    z-index: 3;
+    z-index: inherit;
   }
 }
 /*# sourceMappingURL=index.css.map */
