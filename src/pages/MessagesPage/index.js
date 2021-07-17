@@ -23,8 +23,16 @@ import Navbar from "../../Components/Navbar/Navbar.js";
 let socket;
 // let DisplayImage =
 //   "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=z32A2UTnN8sAX8cSYh0&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=60f2a77035c69157c07eab204a2382f6&oe=60EE0ABE";
-// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
-const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+// const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
+
+const ScrollToBottom = () => {
+  let element = document.getElementById(
+    "MessagesPageContainer__individualMessages__messagesContainer"
+  );
+  element.scrollTop = element.scrollHeight;
+};
+
 const MessagesPage = () => {
   const dispatch = useDispatch();
   let userInfo = useSelector((state) => state.logUserIn.user);
@@ -33,6 +41,7 @@ const MessagesPage = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [recei, setRecei] = useState("");
   const [currentFriend, setCurrentFriend] = useState("");
+  const [imageToUpload, setImageToUpload] = useState([]);
   useEffect(() => {
     if (recei !== "") {
       setMessages([...messages, { received: recei }]);
@@ -66,10 +75,17 @@ const MessagesPage = () => {
     socket.emit("initialize", localStorage.getItem("userinfo"));
     socket.on("receivedMessages", (res) => {
       setRecei(res.message);
-      dispatch(addSentMessage(res));
+      // console.log(res);
+      dispatch(addSentMessage({ ...res }));
       dispatch(sortFriendsListBasedOnIncommingMessage(res.sentBy));
+      ScrollToBottom();
     });
-
+    socket.on("sentReceivedMessages", (res) => {
+      // console.log(res);
+      dispatch(addSentMessage({ ...res }));
+      dispatch(sortFriendsListBasedOnIncommingMessage(res.sentTo));
+      ScrollToBottom();
+    });
     socket.on("test", (res) => {
       console.log(res);
     });
@@ -79,7 +95,6 @@ const MessagesPage = () => {
       // console.log(res);
     });
     socket.on("connect_error", (err) => {
-      dispatch();
       console.log(err);
     });
   }, []);
@@ -92,28 +107,28 @@ const MessagesPage = () => {
       .then((res) => {
         console.log(res.data);
         dispatch(loadFirstMessages(res.data));
-        // let copyRes = JSON.parse(JSON.stringify([...res.data]));
-        // let allUsers = [];
-        // copyRes = copyRes.sort((a, b) => b.sentTime - a.sentTime);
-        // console.log(copyRes);
-        // for (let i = 0; i < copyRes.length; i++) {
-        //   if (
-        //     !allUsers.includes(copyRes[i].sentBy) ||
-        //     !allUsers.includes(copyRes[i].sentTo)
-        //   ) {
-        //     if (copyRes.sentTo === localStorage.getItem("userinfo")) {
-        //       if (!allUsers.includes(copyRes[i].sentBy)) {
-        //         allUsers.push(copyRes[i].sentBy);
-        //       }
-        //     } else {
-        //       if (!allUsers.includes(copyRes[i].sentTo)) {
-        //         allUsers.push(copyRes[i].sentTo);
-        //       }
-        //     }
-        //   }
-        // }
-        // console.log(allUsers);
-        // dispatch(sortFriendsInitially(allUsers));
+        let copyRes = JSON.parse(JSON.stringify([...res.data]));
+        let allUsers = [];
+        copyRes = copyRes.sort((a, b) => b.sentTime - a.sentTime);
+        console.log(copyRes);
+        for (let i = 0; i < copyRes.length; i++) {
+          if (
+            !allUsers.includes(copyRes[i].sentBy) ||
+            !allUsers.includes(copyRes[i].sentTo)
+          ) {
+            if (copyRes.sentTo === localStorage.getItem("userinfo")) {
+              if (!allUsers.includes(copyRes[i].sentBy)) {
+                allUsers.push(copyRes[i].sentBy);
+              }
+            } else {
+              if (!allUsers.includes(copyRes[i].sentTo)) {
+                allUsers.push(copyRes[i].sentTo);
+              }
+            }
+          }
+        }
+        console.log(JSON.stringify(allUsers));
+        dispatch(sortFriendsInitially(allUsers));
       })
       .catch((err) => console.log(err));
   }, []);
@@ -138,6 +153,8 @@ const MessagesPage = () => {
           setMessages={setMessages}
           currentFriend={currentFriend}
           setCurrentFriend={setCurrentFriend}
+          imageToUpload={imageToUpload}
+          setImageToUpload={setImageToUpload}
         />
       )}
 
@@ -156,6 +173,8 @@ const MessagesPage = () => {
           setMessages={setMessages}
           currentFriend={currentFriend}
           setCurrentFriend={setCurrentFriend}
+          imageToUpload={imageToUpload}
+          setImageToUpload={setImageToUpload}
         />
       ) : (
         <></>
@@ -205,10 +224,10 @@ const SideFriendsList = ({
         id: localStorage.getItem("userinfo"),
       })
       .then((res) => {
-        // console.log(res.data);
         setCurrentFriend(res.data[0]);
         document.title = "Wabbit/" + res.data[0].name.split(" ")[0];
         dispatch(addFriendsToFriendList(res.data));
+        ScrollToBottom();
       })
       .catch((err) => console.log(err));
   }, []);
@@ -219,6 +238,7 @@ const SideFriendsList = ({
           setCurrentFriend(frn);
           setShowFriendsInfo(false);
           document.title = "Wabbit/" + frn.name.split(" ")[0];
+          ScrollToBottom();
         }}
         className="MessagesPageContainer__friendList__IndividualFriends"
         key={_id}
@@ -270,6 +290,8 @@ const IndividualMessages = ({
   setMessages,
   currentFriend,
   setCurrentFriend,
+  imageToUpload,
+  setImageToUpload,
 }) => {
   const [createMessages, setCreateMessages] = useState("");
   const dispatch = useDispatch();
@@ -281,13 +303,8 @@ const IndividualMessages = ({
     );
     element.scrollTop = element.scrollHeight;
   }, [messages, currentFriend]);
-  const ScrollToBottom = () => {
-    let element = document.getElementById(
-      "MessagesPageContainer__individualMessages__messagesContainer"
-    );
-    element.scrollTop = element.scrollHeight;
-  };
-  const ReceivedMessages = ({ message, idk }) => {
+
+  const ReceivedMessages = ({ message, idk, messageType, imageURL }) => {
     return (
       <div
         key={idk}
@@ -296,21 +313,38 @@ const IndividualMessages = ({
         <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessages__imageContainer">
           <img src={currentFriend.imageUrl} alt="" />
         </div>
-        <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessages__textContainer">
-          <p>{message}</p>
-        </div>
+
+        {messageType === "Text" ? (
+          <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessages__textContainer">
+            <p>{message}</p>
+          </div>
+        ) : messageType === "Image" ? (
+          <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessages__messageImgaeContainer">
+            <img src={imageURL} alt="" />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
-  const Sentmessages = ({ message, idk }) => {
+  const Sentmessages = ({ message, idk, messageType, imageURL }) => {
     return (
       <div
         key={idk}
         className="MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent"
       >
-        <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__textContainer">
-          <p>{message}</p>
-        </div>
+        {messageType === "Text" ? (
+          <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__textContainer">
+            <p>{message}</p>
+          </div>
+        ) : messageType === "Image" ? (
+          <div className="MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__imageContainer">
+            <img src={imageURL} alt="" />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     );
   };
@@ -325,11 +359,23 @@ const IndividualMessages = ({
         ) {
           if (ele.sentBy === userInfo._id) {
             output.push(
-              <Sentmessages message={ele.message} idk={index} key={index} />
+              <Sentmessages
+                message={ele.message}
+                idk={index}
+                key={index}
+                messageType={ele.type}
+                imageURL={ele.imageUrl}
+              />
             );
           } else if (ele.sentTo === userInfo._id) {
             output.push(
-              <ReceivedMessages message={ele.message} idk={index} key={index} />
+              <ReceivedMessages
+                message={ele.message}
+                idk={index}
+                key={index}
+                messageType={ele.type}
+                imageURL={ele.imageUrl}
+              />
             );
           }
         }
@@ -376,6 +422,28 @@ const IndividualMessages = ({
       </div>
       <div className="MessagesPageContainer__individualMessages__bottomBar">
         <div className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer">
+          {JSON.stringify(imageToUpload) !== "[]" ? (
+            <div className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview">
+              <div className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer">
+                <button
+                  onClick={() => {
+                    setImageToUpload([]);
+                  }}
+                  className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer__button"
+                >
+                  x
+                </button>
+                <img
+                  src={imageToUpload[0]}
+                  alt=""
+                  className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer__image"
+                />
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
+
           <Button
             type="button"
             className="MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__uploadImages"
@@ -383,7 +451,20 @@ const IndividualMessages = ({
             component="label"
           >
             <i className="fas fa-image"></i>
-            <input type="file" accept="images/*" hidden />
+            <input
+              onChange={(e) => {
+                setImageToUpload([
+                  URL.createObjectURL(e.target.files[0]),
+                  e.target.files[0],
+                ]);
+                console.log(e.target.files[0].name);
+                e.target.value = "";
+              }}
+              type="file"
+              accept="images/*"
+              multiple={false}
+              hidden
+            />
           </Button>
         </div>
         <div className="MessagesPageContainer__individualMessages__bottomBar__inputHolder">
@@ -393,7 +474,11 @@ const IndividualMessages = ({
               id="filled-multiline-flexible"
               // label="Multiline"
               value={createMessages}
-              onChange={(e) => setCreateMessages(e.target.value)}
+              onChange={(e) => {
+                if (JSON.stringify(imageToUpload) === "[]") {
+                  setCreateMessages(e.target.value);
+                }
+              }}
               multiline
               rowsMax={2}
               variant="filled"
@@ -405,20 +490,58 @@ const IndividualMessages = ({
             variant="contained"
             className="MessagesPageContainer__individualMessages__bottomBar__sendButtonContainer__button"
             onClick={() => {
-              if (createMessages.trim() !== "") {
+              if (JSON.stringify(imageToUpload) !== "[]") {
+                console.log("IMAGE    IMAGE IMAGE");
                 let emitData = {
                   sentBy: userInfo._id,
                   sentTo: currentFriend._id,
-                  message: createMessages,
+                  // message: createMessages,
                   sentDate: Date.now(),
+                  type: "Image",
+                  imageUrl: imageToUpload[0],
+                  image: imageToUpload[1],
+                  imageName: imageToUpload[1].name,
                 };
                 socket.emit("messagesSent", { ...emitData });
-                dispatch(addSentMessage({ ...emitData }));
-                setCreateMessages("");
+                // dispatch(addSentMessage({ ...emitData }));
+                setImageToUpload([]);
+                //
+                if (createMessages.trim() !== "") {
+                  //
+                  console.log("MESSAGE TEXt");
+                  let newEmitData = {
+                    sentBy: userInfo._id,
+                    sentTo: currentFriend._id,
+                    message: createMessages,
+                    sentDate: Date.now(),
+                    type: "Text",
+                  };
+                  socket.emit("messagesSent", { ...newEmitData });
+                  // dispatch(addSentMessage({ ...newEmitData }));
+                  setCreateMessages("");
+                }
                 dispatch(
                   sortFriendsListBasedOnIncommingMessage(currentFriend._id)
                 );
                 ScrollToBottom();
+              } else {
+                if (createMessages.trim() !== "") {
+                  //
+                  let emitData = {
+                    sentBy: userInfo._id,
+                    sentTo: currentFriend._id,
+                    message: createMessages,
+                    sentDate: Date.now(),
+                    type: "Text",
+                  };
+                  socket.emit("messagesSent", { ...emitData });
+                  // dispatch(addSentMessage({ ...emitData }));
+                  setCreateMessages("");
+                  dispatch(
+                    sortFriendsListBasedOnIncommingMessage(currentFriend._id)
+                  );
+                  ScrollToBottom();
+                }
               }
             }}
           >

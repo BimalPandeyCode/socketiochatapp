@@ -46,7 +46,7 @@ export const friendsList = createSlice({
       });
       let newCopy = [...includesFriends, ...notIncludesfriends];
       while (newCopy.indexOf("") !== -1) {
-        newCopy.splice(newCopy.indexOf("", 1));
+        newCopy.splice(newCopy.indexOf(""), 1);
       }
       state.friends = newCopy;
     },

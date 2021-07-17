@@ -313,6 +313,21 @@
   margin-bottom: 1px;
 }
 
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__imageContainer {
+  -ms-grid-row: 1;
+  -ms-grid-column: 2;
+  grid-area: EachMessageSentTextContainer;
+  margin-left: auto;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__imageContainer > img {
+  width: 200px;
+  height: auto;
+}
+
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__textContainer {
   -ms-grid-row: 1;
   -ms-grid-column: 2;
@@ -370,6 +385,18 @@
   width: 30px;
   height: 30px;
   border-radius: 50%;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessages .MessagesPageContainer__individualMessages__messagesContainer__EachMessages__messageImgaeContainer {
+  max-width: 80%;
+  width: auto;
+  min-width: 1ch;
+  border-radius: 20px;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessages .MessagesPageContainer__individualMessages__messagesContainer__EachMessages__messageImgaeContainer > img {
+  width: 200px;
+  height: auto;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__messagesContainer .MessagesPageContainer__individualMessages__messagesContainer__EachMessages .MessagesPageContainer__individualMessages__messagesContainer__EachMessages__textContainer {
@@ -433,6 +460,42 @@
   -ms-grid-row: 1;
   -ms-grid-column: 1;
   grid-area: bottomBarImagesUpload;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview {
+  position: absolute;
+  width: 0px;
+  height: 0px;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer {
+  position: relative;
+  left: 159px;
+  top: -70px;
+  background-color: black;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer__button {
+  width: 20px;
+  height: 20px;
+  background-color: black;
+  color: wheat;
+  border: none;
+  outline: 1px solid black;
+}
+
+.MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__imagepreview__imageContainer__image {
+  height: 70px;
+  width: auto;
+  border: 1px solid white;
+  border-radius: 5px;
 }
 
 .MessagesPageContainer .MessagesPageContainer__individualMessages .MessagesPageContainer__individualMessages__bottomBar .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer .MessagesPageContainer__individualMessages__bottomBar__uploadImagesContainer__uploadImages {
@@ -653,6 +716,18 @@
     opacity: 1;
     color: white;
     z-index: inherit;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .MessagesPageContainer__individualMessages__messagesContainer__EachMessages__messageImgaeContainer > img {
+    width: 70% !important;
+    height: auto;
+  }
+  .MessagesPageContainer__individualMessages__messagesContainer__EachMessagesSent__imageContainer > img {
+    float: right;
+    width: 70% !important;
+    height: auto;
   }
 }
 /*# sourceMappingURL=index.css.map */
