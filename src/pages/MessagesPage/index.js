@@ -23,8 +23,8 @@ import Navbar from "../../Components/Navbar/Navbar.js";
 let socket;
 // let DisplayImage =
 //   "https://scontent.fktm6-1.fna.fbcdn.net/v/t1.6435-1/c17.0.100.100a/p100x100/122283142_689463975284897_6192283090834406267_n.jpg?_nc_cat=102&ccb=1-3&_nc_sid=7206a8&_nc_ohc=z32A2UTnN8sAX8cSYh0&_nc_ad=z-m&_nc_cid=0&_nc_ht=scontent.fktm6-1.fna&tp=27&oh=60f2a77035c69157c07eab204a2382f6&oe=60EE0ABE";
-const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
-// const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
+// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 
 const ScrollToBottom = () => {
   let element = document.getElementById(

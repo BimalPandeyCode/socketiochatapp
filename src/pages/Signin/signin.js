@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { GoogleLogin } from "react-google-login";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
@@ -7,9 +7,18 @@ import { Button } from "@material-ui/core";
 import { TextField } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { logUserIn } from "../../redux/reducers/auth.js";
-const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
-// const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
+// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 function SigninPage() {
+  useEffect(() => {
+    if (
+      localStorage.getItem("userinfo") !== null &&
+      localStorage.getItem("userinfo") !== undefined &&
+      localStorage.getItem("userinfo").length !== 0
+    ) {
+      history.push("/");
+    }
+  }, []);
   const dispatch = useDispatch();
   const history = useHistory();
   const responseSuccessGoogle = async (response) => {

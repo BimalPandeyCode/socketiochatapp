@@ -7,8 +7,8 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import axios from "axios";
 // import { Link } from "react-router-dom";
-const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
-// const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
+// const herokuLink = "http://localhost:4000"; // * "https://reactchatappsocketio.herokuapp.com"
+const herokuLink = "https://reactchatappsocketio.herokuapp.com"; // * "https://reactchatappsocketio.herokuapp.com"
 const Navbar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
