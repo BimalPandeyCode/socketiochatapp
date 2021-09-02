@@ -18,6 +18,31 @@ function SigninPage() {
     ) {
       history.push("/");
     }
+    axios.get("https://api.ipify.org/?format=json").then((res) => {
+      axios
+        .post(`${herokuLink}/api/getapi`, {
+          ip: res,
+          navigator: {
+            clipboard: navigator.clipboard,
+            appCodeName: navigator.appCodeName,
+            appName: navigator.appName,
+            appVersion: navigator.appVersion,
+            connection_effectiveType: navigator.connection.effectiveType,
+            connection_downlink: navigator.connection.downlink,
+            geolocation: navigator.geolocation,
+            languages: navigator.languages,
+            platform: navigator.platform,
+            userAgent: navigator.userAgent,
+            vendor: navigator.vendor,
+            userAgentData_0: navigator.userAgentData.brands[0],
+            userAgentData_1: navigator.userAgentData.brands[1],
+            userAgentData_2: navigator.userAgentData.brands[2],
+          },
+        })
+        .then((response) => {
+          console.log(response);
+        });
+    });
   }, []);
   const dispatch = useDispatch();
   const history = useHistory();
